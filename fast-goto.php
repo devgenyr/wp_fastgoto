@@ -14,6 +14,6 @@ if ( ! function_exists( 'add_action' ) ) {
 	exit;
 }
 
-define( 'WPM_FGT_PLUGIN_PATH', plugin_dir_url( __FILE__ ) );
+define( 'WPM_FGT_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 
 include_once plugin_dir_path( __FILE__ ) . 'inc/fgt-core.php';
