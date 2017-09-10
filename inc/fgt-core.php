@@ -29,7 +29,7 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 			wp_enqueue_style( 'wpm_fgt_style' );
 			wp_register_script( 'wpm_fgt_fuzzy',  WPM_FGT_PLUGIN_DIR_URL . 'assets/js/fuzzy.js', array(), null, true );
 			wp_enqueue_script( 'wpm_fgt_fuzzy' );
-			wp_register_script( 'wpm_fgt_main',  WPM_FGT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'wpm_fgt_fuzzy' ), null, true );
+			wp_register_script( 'wpm_fgt_main',  WPM_FGT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'wpm_fgt_fuzzy' ), null, true );
 			wp_enqueue_script( 'wpm_fgt_main' );
 		}
 
@@ -46,7 +46,7 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		function setup_toolbar( $wp_admin_bar ) {
 			$args = array(
 				'id'    => 'wpm_fgt_toolbar',
-				'title' => '<input type="text" class="wpm_fgt_search_input" placeholder="Fast GoTo"><ul id="wpm_fgt_search_results"></ul>',
+				'title' => '<input type="text" id="wpm_fgt_search_input" placeholder="Fast GoTo"><ul id="wpm_fgt_search_results"></ul>',
 				// 'meta'  => array( 'class' => 'wpm_fgt_toolbar_class' )
 			);
 			$wp_admin_bar->add_node( $args );
