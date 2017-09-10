@@ -1,1 +1,1 @@
-# Wordpress Fast GoTo plugin
+# WordPress Fast GoTo plugin
