@@ -16,8 +16,10 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		function init() {
 			if ( is_admin_bar_showing() ) {
 				error_log('wpm_fgt_init');
-				add_action( 'admin_bar_menu', [&$this, 'setup_toolbar' ], 999 );
 				add_action( 'admin_enqueue_scripts', [&$this, 'add_assets' ] );
+				add_action( 'wp_enqueue_scripts', [&$this, 'add_assets' ] );
+				add_action( 'admin_bar_menu', [ &$this, 'get_locations' ] );
+				add_action( 'admin_bar_menu', [&$this, 'setup_toolbar' ], 999 );
 			}
 		}
 
@@ -25,6 +27,12 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 			error_log('wpm_fgt_init2');
 			wp_register_style( 'wpm_fgt_style', plugins_url( '../assets/css/fgt-main.css', __FILE__ ), array(), null, 'all' );
 			wp_enqueue_style( 'wpm_fgt_style' );
+		}
+
+		function get_locations() {
+			global $submenu, $menu, $pagenow;
+			error_log(print_r($menu,true));
+			error_log(print_r($submenu,true));
 		}
 
 		function setup_toolbar( $wp_admin_bar ) {
