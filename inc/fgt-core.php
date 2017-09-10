@@ -25,14 +25,20 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 		function add_assets() {
 			error_log('wpm_fgt_init2');
-			wp_register_style( 'wpm_fgt_style', plugins_url( '../assets/css/fgt-main.css', __FILE__ ), array(), null, 'all' );
+			wp_register_style( 'wpm_fgt_style', WPM_FGT_PLUGIN_PATH . 'assets/css/fgt-main.css', array(), null, 'all' );
 			wp_enqueue_style( 'wpm_fgt_style' );
+			wp_register_script( 'wpm_fgt_fuzzy',  WPM_FGT_PLUGIN_PATH . 'assets/js/fuzzy.js', array(), null, true );
+			wp_enqueue_script( 'wpm_fgt_fuzzy' );
 		}
 
 		function get_locations() {
 			global $submenu, $menu, $pagenow;
-			error_log(print_r($menu,true));
-			error_log(print_r($submenu,true));
+			if ( is_admin() ) {
+				error_log(print_r($menu,true));
+				error_log(print_r($submenu,true));
+			} else {
+				// get locations from cache
+			}
 		}
 
 		function setup_toolbar( $wp_admin_bar ) {
