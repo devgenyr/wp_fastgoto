@@ -1,0 +1,1 @@
+# Wordpress Fast GoTo plugin
