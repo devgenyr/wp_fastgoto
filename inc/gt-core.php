@@ -9,34 +9,45 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 	class WPM_FastGoTo {
 
+		private $searchable = array();
+
 		function __construct() {
 			add_action( 'init', [ &$this, 'init' ] );
 		}
 
 		function init() {
 			if ( is_admin_bar_showing() ) {
-				error_log('wpm_gt_init');
-				add_action( 'admin_enqueue_scripts', [&$this, 'add_assets' ] );
-				add_action( 'wp_enqueue_scripts', [&$this, 'add_assets' ] );
-				add_action( 'admin_bar_menu', [ &$this, 'get_locations' ] );
-				add_action( 'admin_bar_menu', [&$this, 'setup_toolbar' ], 999 );
+				add_action( 'admin_enqueue_scripts', [ &$this, 'add_assets' ] );
+				add_action( 'wp_enqueue_scripts', [ &$this, 'add_assets' ] );
+				add_action( 'admin_init', [ &$this, 'get_locations' ] );
+				add_action( 'admin_bar_menu', [ &$this, 'setup_toolbar' ], 999 );
 			}
 		}
 
 		function add_assets() {
-			error_log('wpm_gt_init2');
 			wp_register_style( 'wpm_gt_style', WPM_GT_PLUGIN_DIR_URL . 'assets/css/fgt-main.css', array(), null, 'all' );
 			wp_enqueue_style( 'wpm_gt_style' );
 			wp_register_script( 'wpm_gt_fuzzy',  WPM_GT_PLUGIN_DIR_URL . 'assets/js/fuzzy.js', array(), null, true );
 			wp_enqueue_script( 'wpm_gt_fuzzy' );
 			wp_register_script( 'wpm_gt_main',  WPM_GT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'wpm_gt_fuzzy' ), null, true );
 			wp_enqueue_script( 'wpm_gt_main' );
+			error_log('wpm1');
+			error_log(print_r($this->searchable, true));
+			wp_add_inline_script( 'wpm_gt_main', 'var wpm_gt_locations = ' . json_encode($this->searchable) . ';', 'before' );
 		}
 
 		function get_locations() {
 			global $submenu, $menu, $pagenow;
 			if ( is_admin() ) {
-				error_log(print_r($menu,true));
+				// error_log(print_r($menu,true));
+				foreach ( $menu as $menu_item ) {
+					if ( isset( $menu_item[0] ) && ! empty( $menu_item[0] ) ) {
+						$this->searchable[] = wp_strip_all_tags( $menu_item[0], true );
+					}
+				}
+				error_log('wpm2');
+				error_log(print_r($this->searchable, true));
+				error_log(print_r(json_encode($this->searchable), true));
 				error_log(print_r($submenu,true));
 			} else {
 				// get locations from cache
