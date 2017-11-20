@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 				pre: "<b>",
 				post: "</b>"
 		};
-		console.log(wpm_gt_locations);
+
 		var filtered = fuzzy.filter(search, wpm_gt_locations, options);
 
 		// process the results to extract the strings
