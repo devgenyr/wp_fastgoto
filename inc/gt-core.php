@@ -15,7 +15,7 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 		function init() {
 			if ( is_admin_bar_showing() ) {
-				error_log('wpm_fgt_init');
+				error_log('wpm_gt_init');
 				add_action( 'admin_enqueue_scripts', [&$this, 'add_assets' ] );
 				add_action( 'wp_enqueue_scripts', [&$this, 'add_assets' ] );
 				add_action( 'admin_bar_menu', [ &$this, 'get_locations' ] );
@@ -24,13 +24,13 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		}
 
 		function add_assets() {
-			error_log('wpm_fgt_init2');
-			wp_register_style( 'wpm_fgt_style', WPM_FGT_PLUGIN_DIR_URL . 'assets/css/fgt-main.css', array(), null, 'all' );
-			wp_enqueue_style( 'wpm_fgt_style' );
-			wp_register_script( 'wpm_fgt_fuzzy',  WPM_FGT_PLUGIN_DIR_URL . 'assets/js/fuzzy.js', array(), null, true );
-			wp_enqueue_script( 'wpm_fgt_fuzzy' );
-			wp_register_script( 'wpm_fgt_main',  WPM_FGT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'wpm_fgt_fuzzy' ), null, true );
-			wp_enqueue_script( 'wpm_fgt_main' );
+			error_log('wpm_gt_init2');
+			wp_register_style( 'wpm_gt_style', WPM_GT_PLUGIN_DIR_URL . 'assets/css/fgt-main.css', array(), null, 'all' );
+			wp_enqueue_style( 'wpm_gt_style' );
+			wp_register_script( 'wpm_gt_fuzzy',  WPM_GT_PLUGIN_DIR_URL . 'assets/js/fuzzy.js', array(), null, true );
+			wp_enqueue_script( 'wpm_gt_fuzzy' );
+			wp_register_script( 'wpm_gt_main',  WPM_GT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'wpm_gt_fuzzy' ), null, true );
+			wp_enqueue_script( 'wpm_gt_main' );
 		}
 
 		function get_locations() {
@@ -45,15 +45,15 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 		function setup_toolbar( $wp_admin_bar ) {
 			$args = array(
-				'id'    => 'wpm_fgt_toolbar',
-				'title' => '<input type="text" id="wpm_fgt_search_input" placeholder="Fast GoTo"><ul id="wpm_fgt_search_results"></ul>',
-				// 'meta'  => array( 'class' => 'wpm_fgt_toolbar_class' )
+				'id'    => 'wpm_gt_toolbar',
+				'title' => '<input type="text" id="wpm_gt_search_input" placeholder="Fast GoTo"><ul id="wpm_gt_search_results"></ul>',
+				// 'meta'  => array( 'class' => 'wpm_gt_toolbar_class' )
 			);
 			$wp_admin_bar->add_node( $args );
 		}
 
 	}
 
-	$wpm_fgt_class = new WPM_FastGoTo;
+	$wpm_gt_class = new WPM_FastGoTo;
 
 }

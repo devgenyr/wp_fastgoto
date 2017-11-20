@@ -1,5 +1,5 @@
 
-#wp-admin-bar-wpm_fgt_toolbar #wpm_fgt_search_input {
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_input {
 	display: inline-block;
 	border: none;
 	border-radius: 3px;
@@ -7,22 +7,22 @@
 	padding: 0 5px;
 }
 
-#wp-admin-bar-wpm_fgt_toolbar #wpm_fgt_search_results {
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_results {
 	background-color: #fff;
 	display: none;
 }
 
-#wp-admin-bar-wpm_fgt_toolbar #wpm_fgt_search_input:focus + #wpm_fgt_search_results {
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_input:focus + #wpm_gt_search_results {
 	display: block;
 }
 
-#wp-admin-bar-wpm_fgt_toolbar #wpm_fgt_search_results li {
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_results li {
 	display: block;
 	background-color: #fff;
 	float: none;
 	color: #000;
 }
 
-#wp-admin-bar-wpm_fgt_toolbar #wpm_fgt_search_results li b {
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_results li b {
 	font-weight: bold;
 }

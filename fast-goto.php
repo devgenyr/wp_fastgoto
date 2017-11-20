@@ -14,6 +14,6 @@ if ( ! function_exists( 'add_action' ) ) {
 	exit;
 }
 
-define( 'WPM_FGT_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'WPM_GT_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 
-include_once plugin_dir_path( __FILE__ ) . 'inc/fgt-core.php';
+include_once plugin_dir_path( __FILE__ ) . 'inc/gt-core.php';
