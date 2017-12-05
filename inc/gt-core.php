@@ -31,8 +31,6 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 			wp_enqueue_script( 'wpm_gt_fuzzy' );
 			wp_register_script( 'wpm_gt_main',  WPM_GT_PLUGIN_DIR_URL . 'assets/js/main.js', array( 'jquery', 'wpm_gt_fuzzy' ), null, true );
 			wp_enqueue_script( 'wpm_gt_main' );
-			error_log('wpm1');
-			error_log(print_r($this->searchable, true));
 			wp_add_inline_script( 'wpm_gt_main', 'var wpm_gt_admin_url = "' . admin_url() . '";' ."\n" .
 			                                     'var wpm_gt_locations = ' . json_encode($this->searchable) . ';', 'before' );
 		}
@@ -69,12 +67,12 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 						$index += $offset + 1;
 					}
 				}
-				error_log('wpm2');
-				error_log(print_r($this->searchable, true));
-				error_log(print_r(json_encode($this->searchable), true));
-				error_log(print_r($pagenow, true));
-				error_log(print_r($menu, true));
-				error_log(print_r($submenu,true));
+				// error_log('wpm2');
+				// error_log(print_r($this->searchable, true));
+				// error_log(print_r(json_encode($this->searchable), true));
+				// error_log(print_r($pagenow, true));
+				// error_log(print_r($menu, true));
+				// error_log(print_r($submenu,true));
 			} else {
 				// get locations from cache
 			}
