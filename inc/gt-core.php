@@ -33,7 +33,8 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 			wp_enqueue_script( 'wpm_gt_main' );
 			error_log('wpm1');
 			error_log(print_r($this->searchable, true));
-			wp_add_inline_script( 'wpm_gt_main', 'var wpm_gt_locations = ' . json_encode($this->searchable) . ';', 'before' );
+			wp_add_inline_script( 'wpm_gt_main', 'var wpm_gt_admin_url = "' . admin_url() . '";' ."\n" .
+			                                     'var wpm_gt_locations = ' . json_encode($this->searchable) . ';', 'before' );
 		}
 
 		function get_locations() {

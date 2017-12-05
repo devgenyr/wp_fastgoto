@@ -19,7 +19,13 @@ jQuery(document).ready(function($) {
 
 		// process the results to extract the strings
 		var newLocations = filtered.map( function(el) {
-			return '<li>' + el.string + '<br>/' + el.original.link + '</li>';
+			var render;
+			render = '<li><a href="' + wpm_gt_admin_url + el.original.link + '">';
+			if ( el.original.isSubmenu ) {
+				render += wpm_gt_locations[el.original.parent].title + ' > ';
+			}
+			render += el.string + '</a><span>/' + el.original.link + '</span></li>';
+			return render;
 		});
 
 		$('#wpm_gt_search_results').html( newLocations.join('') );
