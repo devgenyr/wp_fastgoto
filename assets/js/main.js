@@ -11,14 +11,15 @@ jQuery(document).ready(function($) {
 		var search = $('#wpm_gt_search_input').val();
 		var options = {
 				pre: "<b>",
-				post: "</b>"
+				post: "</b>",
+				extract: function(el) { return el.title; }
 		};
 
 		var filtered = fuzzy.filter(search, wpm_gt_locations, options);
 
 		// process the results to extract the strings
-		var newLocations = filtered.map(function(el) {
-			return '<li>' + el.string + '</li>';
+		var newLocations = filtered.map( function(el) {
+			return '<li>' + el.string + '<br>/' + el.original.link + '</li>';
 		});
 
 		$('#wpm_gt_search_results').html( newLocations.join('') );
