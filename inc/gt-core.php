@@ -39,15 +39,39 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		function get_locations() {
 			global $submenu, $menu, $pagenow;
 			if ( is_admin() ) {
-				// error_log(print_r($menu,true));
+				$index = 0;
 				foreach ( $menu as $menu_item ) {
 					if ( isset( $menu_item[0] ) && ! empty( $menu_item[0] ) ) {
-						$this->searchable[] = array( 'title' => wp_strip_all_tags( $menu_item[0], true ), 'link' => ( isset( $menu_item[2] ) && ! empty( $menu_item[2] ) ? $menu_item[2] : '' ) );
+						$main_menu_link = isset( $menu_item[2] ) && ! empty( $menu_item[2] ) ? $menu_item[2] : '';
+						$this->searchable[] = array(
+							'isSubmenu' => false,
+							'title' => wp_strip_all_tags( $menu_item[0], true ),
+							'link' => $main_menu_link,
+						);
+						$offset = 0;
+						foreach ( $submenu as $parent_link => $sub_items ) {
+							if ( $parent_link === $main_menu_link ) {
+								foreach ( $sub_items as $sub_item ) {
+									if ( isset( $sub_item[0] ) && ! empty( $sub_item[0] ) ) {
+										$offset += 1;
+										$sub_menu_link = isset( $sub_item[2] ) && ! empty( $sub_item[2] ) ? $sub_item[2] : '';
+										$this->searchable[] = array(
+											'isSubmenu' => true,
+											'title' => wp_strip_all_tags( $sub_item[0], true ),
+											'link' => $sub_menu_link,
+											'parent' => $index,
+										);
+									}
+								}
+							}
+						}
+						$index += $offset + 1;
 					}
 				}
 				error_log('wpm2');
 				error_log(print_r($this->searchable, true));
 				error_log(print_r(json_encode($this->searchable), true));
+				error_log(print_r($pagenow, true));
 				error_log(print_r($menu, true));
 				error_log(print_r($submenu,true));
 			} else {
