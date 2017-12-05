@@ -42,12 +42,13 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 				// error_log(print_r($menu,true));
 				foreach ( $menu as $menu_item ) {
 					if ( isset( $menu_item[0] ) && ! empty( $menu_item[0] ) ) {
-						$this->searchable[] = wp_strip_all_tags( $menu_item[0], true );
+						$this->searchable[] = array( 'title' => wp_strip_all_tags( $menu_item[0], true ), 'link' => ( isset( $menu_item[2] ) && ! empty( $menu_item[2] ) ? $menu_item[2] : '' ) );
 					}
 				}
 				error_log('wpm2');
 				error_log(print_r($this->searchable, true));
 				error_log(print_r(json_encode($this->searchable), true));
+				error_log(print_r($menu, true));
 				error_log(print_r($submenu,true));
 			} else {
 				// get locations from cache
