@@ -7,7 +7,7 @@ if ( ! function_exists( 'add_action' ) ) {
 
 if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
-	class WPM_FastGoTo {
+	class WPM_Fast_GoTo {
 
 		private $searchable = array();
 

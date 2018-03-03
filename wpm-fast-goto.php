@@ -16,6 +16,6 @@ if ( ! function_exists( 'add_action' ) ) {
 
 define( 'WPM_GT_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 
-include_once plugin_dir_path( __FILE__ ) . 'inc/class-gt-core.php';
+include_once plugin_dir_path( __FILE__ ) . 'inc/class-wpm-fast-goto.php';
 
-$wpm_gt_class = new WPM_FastGoTo;
+$wpm_gt_class = new WPM_Fast_GoTo;
