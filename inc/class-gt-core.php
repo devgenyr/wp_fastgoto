@@ -96,6 +96,4 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 	}
 
-	$wpm_gt_class = new WPM_FastGoTo;
-
 }
