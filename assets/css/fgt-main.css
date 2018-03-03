@@ -26,3 +26,7 @@
 #wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_results li b {
 	font-weight: bold;
 }
+
+#wp-admin-bar-wpm_gt_toolbar #wpm_gt_search_results:hover {
+	display: block;
+}
