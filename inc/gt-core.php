@@ -48,27 +48,33 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		function update_locations() {
 			global $submenu, $menu, $pagenow;
 			$index = 0;
-			// error_log(print_r($submenu, true));
 			foreach ( $menu as $menu_item ) {
 				if ( isset( $menu_item[0] ) && ! empty( $menu_item[0] ) ) {
 					$main_menu_link = isset( $menu_item[2] ) && ! empty( $menu_item[2] ) ? $menu_item[2] : '';
+					$current_main_title = wp_strip_all_tags( $menu_item[0], true );
 					$this->searchable[] = array(
 						'isSubmenu' => false,
-						'title' => wp_strip_all_tags( $menu_item[0], true ),
+						'title' => $current_main_title,
+						'original_title' => $current_main_title,
 						'link' => $main_menu_link,
 					);
 					$offset = 0;
 					if ( isset( $submenu[ $main_menu_link ] ) && ! empty( $submenu[ $main_menu_link ] ) ) {
 						foreach ( $submenu[ $main_menu_link ] as $key => $sub_item ) {
 							if ( isset( $sub_item[0] ) && ! empty( $sub_item[0] ) ) {
-								$offset += 1;
 								$sub_menu_link = isset( $sub_item[2] ) && ! empty( $sub_item[2] ) ? $sub_item[2] : '';
-								$this->searchable[] = array(
-									'isSubmenu' => true,
-									'title' => wp_strip_all_tags( $sub_item[0], true ),
-									'link' => $sub_menu_link,
-									'parent' => $index,
-								);
+								// if submenu link is the same as its parent, then just update the parent title
+								if ( $sub_menu_link === $main_menu_link ) {
+									$this->searchable[ $index ]['title'] .= ' - ' . wp_strip_all_tags( $sub_item[0], true );
+								} else {
+									$offset += 1;
+									$this->searchable[] = array(
+										'isSubmenu' => true,
+										'title' => wp_strip_all_tags( $sub_item[0], true ),
+										'link' => $sub_menu_link,
+										'parent' => $index,
+									);
+								}
 							}
 						}
 					}
