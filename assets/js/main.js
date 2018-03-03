@@ -21,9 +21,9 @@ jQuery(document).ready(function($) {
 		var newLocations = filtered.map( function(el) {
 			var render;
 			render = '<li><a href="' + wpm_gt_admin_url + el.original.link + '">';
-			if ( el.original.isSubmenu ) {
-				render += wpm_gt_locations[el.original.parent].original_title + ' > ';
-			}
+			// if ( el.original.isSubmenu ) {
+			// 	render += wpm_gt_locations[el.original.parent].original_title + ' > ';
+			// }
 			render += el.string + '</a><span>/' + el.original.link + '</span></li>';
 			return render;
 		});

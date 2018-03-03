@@ -65,12 +65,12 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 								$sub_menu_link = isset( $sub_item[2] ) && ! empty( $sub_item[2] ) ? $sub_item[2] : '';
 								// if submenu link is the same as its parent, then just update the parent title
 								if ( $sub_menu_link === $main_menu_link ) {
-									$this->searchable[ $index ]['title'] .= ' - ' . wp_strip_all_tags( $sub_item[0], true );
+									$this->searchable[ $index ]['title'] .= ' ( ' . wp_strip_all_tags( $sub_item[0], true ) . ' )';
 								} else {
 									$offset += 1;
 									$this->searchable[] = array(
 										'isSubmenu' => true,
-										'title' => wp_strip_all_tags( $sub_item[0], true ),
+										'title' => $current_main_title . ' > ' . wp_strip_all_tags( $sub_item[0], true ),
 										'link' => $sub_menu_link,
 										'parent' => $index,
 									);
