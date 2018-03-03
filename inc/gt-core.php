@@ -9,18 +9,18 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 
 	class WPM_FastGoTo {
 
-		private $searchable = [];
+		private $searchable = array();
 
 		function __construct() {
-			add_action( 'init', [ &$this, 'init' ] );
+			add_action( 'init', array( &$this, 'init' ) );
 		}
 
 		function init() {
 			if ( is_admin_bar_showing() ) {
 				$this->load_locations();
-				add_action( 'admin_enqueue_scripts', [ &$this, 'add_assets' ] );
-				add_action( 'wp_enqueue_scripts', [ &$this, 'add_assets' ] );
-				add_action( 'admin_bar_menu', [ &$this, 'setup_toolbar' ], 999 );
+				add_action( 'admin_enqueue_scripts', array( &$this, 'add_assets' ) );
+				add_action( 'wp_enqueue_scripts', array( &$this, 'add_assets' ) );
+				add_action( 'admin_bar_menu', array( &$this, 'setup_toolbar' ), 999 );
 			}
 		}
 
@@ -38,10 +38,10 @@ if ( ! class_exists( 'WPM_FastGoTo' ) ) {
 		function load_locations() {
 			if ( is_admin() ) {
 				// update & store admin menu locations
-				add_action ( 'admin_init', [ &$this, 'update_locations' ] );
+				add_action ( 'admin_init', array( &$this, 'update_locations' ) );
 			} else {
 				// if we are not in admin area then get locations from options
-				$this->searchable = get_option( 'wpm_gt_admin_menu_list', [] );
+				$this->searchable = get_option( 'wpm_gt_admin_menu_list', array() );
 			}
 		}
 
